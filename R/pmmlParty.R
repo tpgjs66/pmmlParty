@@ -108,24 +108,6 @@ pmmlparty <- function(model,
         field$levels[[field$name[i]]] <- as.character(levels(data[,field$name[i]]))
   }
 
-  # 090519 Identify those variables that are not used in the model. We
-  # need to deal with a model that has surrogates. Use maxsurrogate to
-  # distinguish. However, when using surrogates perhaps we also need
-  # to identify the smaller list of inactive, since there may still be
-  # inactive variables. This is not yet implemented.
-
-  # if (model$control$maxsurrogate == 0)
-  # {
-  #   frame <- model$frame
-  #   leaves <- frame$var == "<leaf>"
-  #   used <- unique(frame$var[!leaves])
-  #   inactive <- setdiff(setdiff(levels(used), used), "<leaf>")
-  # }
-  # else
-  #   inactive <- NULL
-
-  # PMML
-
   pmml <- pmml:::.pmmlRootNode()
 
   # PMML -> Header
