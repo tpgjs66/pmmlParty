@@ -19,9 +19,9 @@ buildPartyNode <- function(model,function.name)
   values[[1]]<- "" #list("")
 
   # Added by Zementis: Information to create nodes.
-  ids <- nodeids(model) -1 # node id starts from 0
-  rows <- nodeids(model) -1 # node id starts from 0
-  parent_ii <- 0  # node id starts from 0
+  ids <- nodeids(model)
+  rows <- nodeids(model)
+  parent_ii <- 1
 
   # Check the function.name.
   scores <-c()

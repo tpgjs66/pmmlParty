@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<PMML version="4.3" xmlns="http://www.dmg.org/PMML-4_3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_3 http://www.dmg.org/pmml/v4-3/pmml-4-3.xsd">
+ <Header copyright="Copyright (c) 2018 KimSeheon" description="CHAID Decision Tree Model">
+  <Extension name="user" value="KimSeheon" extender="PMMLParty"/>
+  <Application name="PMMLParty" version="1.4"/>
+  <Timestamp>2018-04-03 15:42:43</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="15">
+  <DataField name="workcharging" optype="categorical" dataType="string">
+   <Value value="0"/>
+   <Value value="1"/>
+  </DataField>
+  <DataField name="S1" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="3"/>
+  </DataField>
+  <DataField name="S2" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+   <Value value="3"/>
+  </DataField>
+  <DataField name="S3" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+   <Value value="3"/>
+  </DataField>
+  <DataField name="S4" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+   <Value value="3"/>
+  </DataField>
+  <DataField name="S5" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+  </DataField>
+  <DataField name="S7" optype="categorical" dataType="string">
+   <Value value="1"/>
+   <Value value="3"/>
+   <Value value="4"/>
+   <Value value="5"/>
+   <Value value="6"/>
+   <Value value="7"/>
+   <Value value="8"/>
+  </DataField>
+  <DataField name="S8" optype="ordinal" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+   <Value value="3"/>
+   <Value value="4"/>
+   <Value value="5"/>
+   <Value value="6"/>
+  </DataField>
+  <DataField name="S9" optype="ordinal" dataType="string">
+   <Value value="1"/>
+   <Value value="3"/>
+   <Value value="5"/>
+   <Value value="6"/>
+   <Value value="7"/>
+   <Value value="8"/>
+   <Value value="9"/>
+  </DataField>
+  <DataField name="T1" optype="categorical" dataType="string">
+   <Value value="BEV"/>
+   <Value value="PHEV"/>
+  </DataField>
+  <DataField name="T7" optype="categorical" dataType="string">
+   <Value value="1st trip"/>
+   <Value value="Anders"/>
+   <Value value="Auto"/>
+   <Value value="Bus"/>
+   <Value value="Fiets"/>
+   <Value value="Lopend"/>
+   <Value value="Metro"/>
+   <Value value="Onbekend"/>
+   <Value value="Taxi"/>
+   <Value value="Tram"/>
+   <Value value="Trein"/>
+  </DataField>
+  <DataField name="T8" optype="categorical" dataType="string">
+   <Value value="Anders"/>
+   <Value value="Auto"/>
+   <Value value="Bus"/>
+   <Value value="Fiets"/>
+   <Value value="Last trip"/>
+   <Value value="Lopend"/>
+   <Value value="Metro"/>
+   <Value value="Onbekend"/>
+   <Value value="Taxi"/>
+   <Value value="Tram"/>
+   <Value value="Trein"/>
+  </DataField>
+  <DataField name="T10" optype="categorical" dataType="string">
+   <Value value="01 Alleen laden"/>
+   <Value value="02 Naar werk of school"/>
+   <Value value="03 Naar huis"/>
+   <Value value="04 Dagelijkse boodschappen"/>
+   <Value value="05 Winkelen"/>
+   <Value value="06 Ophalen of wegbrengen"/>
+   <Value value="07 Diensten of prive zaken"/>
+   <Value value="08 Sociale activiteiten"/>
+   <Value value="09 Vrije tijd"/>
+   <Value value="10 Wachten"/>
+   <Value value="11 Andere activiteiten"/>
+   <Value value="12 Onbekend"/>
+  </DataField>
+  <DataField name="T11" optype="categorical" dataType="string">
+   <Value value="01 Alleen laden"/>
+   <Value value="02 Naar werk of school"/>
+   <Value value="03 Naar huis"/>
+   <Value value="04 Dagelijkse boodschappen"/>
+   <Value value="05 Winkelen"/>
+   <Value value="06 Ophalen of wegbrengen"/>
+   <Value value="07 Diensten of prive zaken"/>
+   <Value value="08 Sociale activiteiten"/>
+   <Value value="09 Vrije tijd"/>
+   <Value value="10 Wachten"/>
+   <Value value="11 Andere activiteiten"/>
+   <Value value="12 Onbekend"/>
+  </DataField>
+  <DataField name="T15" optype="ordinal" dataType="string">
+   <Value value="1"/>
+   <Value value="2"/>
+   <Value value="3"/>
+  </DataField>
+ </DataDictionary>
+ <TreeModel modelName="CHAID_Model" functionName="classification" algorithmName="CHAID" splitCharacteristic="multiSplit" missingValueStrategy="defaultChild" noTrueChildStrategy="returnLastPrediction">
+  <MiningSchema>
+   <MiningField name="workcharging" usageType="predicted" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S1" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S2" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S3" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S4" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S5" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S7" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S8" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="S9" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T1" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T7" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T8" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T10" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T11" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="T15" usageType="active" invalidValueTreatment="returnInvalid"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Predicted_workcharging" optype="categorical" dataType="string" feature="predictedValue"/>
+   <OutputField name="Probability_0" optype="continuous" dataType="double" feature="probability" value="0"/>
+   <OutputField name="Probability_1" optype="continuous" dataType="double" feature="probability" value="1"/>
+  </Output>
+  <Node id="1" score="0" recordCount="13249">
+   <True/>
+   <ScoreDistribution value="0" recordCount="2028"/>
+   <Extension extender="SeheonKim" names="probability" value="0.832170701682396"/>
+   <ScoreDistribution value="1" recordCount="409"/>
+   <Extension extender="SeheonKim" names="probability" value="0.167829298317604"/>
+   <Node id="2" score="0" recordCount="2437">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="T15" operator="isIn" value="1"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="0" recordCount="1317"/>
+    <Extension extender="SeheonKim" names="probability" value="0.876830892143808"/>
+    <ScoreDistribution value="1" recordCount="185"/>
+    <Extension extender="SeheonKim" names="probability" value="0.123169107856192"/>
+   </Node>
+   <Node id="4" score="0" recordCount="9310">
+    <CompoundPredicate booleanOperator="surrogate">
+     <SimplePredicate field="T15" operator="isIn" value="3"/>
+    </CompoundPredicate>
+    <ScoreDistribution value="0" recordCount="3683"/>
+    <Extension extender="SeheonKim" names="probability" value="0.974854420328216"/>
+    <ScoreDistribution value="1" recordCount="95"/>
+    <Extension extender="SeheonKim" names="probability" value="0.025145579671784"/>
+    <Node id="5" score="0" recordCount="3778">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="T10" operator="isIn" value1="01Alleenladen" value2="02Naarwerkofschool" value3="03Naarhuis" value4="10Wachten"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="0" recordCount="1953"/>
+     <Extension extender="SeheonKim" names="probability" value="0.991370558375634"/>
+     <ScoreDistribution value="1" recordCount="17"/>
+     <Extension extender="SeheonKim" names="probability" value="0.00862944162436548"/>
+    </Node>
+    <Node id="7" score="0" recordCount="3562">
+     <CompoundPredicate booleanOperator="surrogate">
+      <SimplePredicate field="T10" operator="isIn" value1="06Ophalenofwegbrengen" value2="08Socialeactiviteiten" value3="09Vrijetijd" value4="12Onbekend"/>
+     </CompoundPredicate>
+     <ScoreDistribution value="0" recordCount="0"/>
+     <Extension extender="SeheonKim" names="probability" value="NaN"/>
+     <ScoreDistribution value="1" recordCount="0"/>
+     <Extension extender="SeheonKim" names="probability" value="NaN"/>
+    </Node>
+   </Node>
+  </Node>
+ </TreeModel>
+</PMML>

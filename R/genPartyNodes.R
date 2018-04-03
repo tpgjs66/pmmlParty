@@ -82,27 +82,26 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
 
     # nsplits <- length(unique(as.list(model$node)[[ii]]$split$index))
 
-    split.points <- which(depths[c(-1,-2)] == depths[2]) + 1 # Binary tree
+    split.points <- which(depths==depths[1]+1)
     # split.points <- as.list(model$node)[[ii]]$kids
 
     child <- c()
-    nb <- list()
+    nb <- c()
     if (length(split.points) > 0){
       for (i in 1:length(split.points)) {
-        # if (length(split.points) == 0) {
-        #
-        # }
-        lb <- 2:split.points[i]
-        rb <- (split.points[i]+1):length(depths)
-
-
-        nb <- list(lb,rb)
+        if (i == 1) {
+          nb[[i]] <- as.list(2:as.numeric(split.points[i]))
+        } else if (i == length(split.points)) {
+          nb[[i]] <- as.list(as.numeric(split.points[i]):as.numeric(length(depths)))
+        } else {
+          nb[[i]] <- as.list(as.numeric(split.points[i]):as.numeric(split.points[i+1]-1))
+        }
       }
       for (i in 1:length(nb)) {
-
-        child <- genPartyNodes(depths[nb[[i]]],ids[nb[[i]]],counts[nb[[i]]],
-                               scores[nb[[i]]],fieldLabels[nb[[i]]],ops[nb[[i]]],
-                               values[nb[[i]]],model,data,ii,rows[nb[[i]]],i)
+        nnb <- unlist(nb[[i]])
+        child <- genPartyNodes(depths[nnb],ids[nnb],counts[nnb],
+                               scores[nnb],fieldLabels[nnb],ops[nnb],
+                               values[nnb],model,data,ii,rows[nnb],i)
         node <- append.XMLNode(node,child)
       }
     }
