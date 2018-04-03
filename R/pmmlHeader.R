@@ -3,7 +3,7 @@
 pmmlHeader<- function (description, copyright, app.name) 
 {
   if (is.null(copyright)) 
-    copyright <- .generateCopyright()
+    copyright <- "Copyright (c) 2018 pmmlParty KimSeheon"
   header <- xmlNode("Header", attrs = c(copyright = copyright, 
                                         description = description))
   header <- append.XMLNode(header, xmlNode("Extension", attrs = c(name = "user", 
