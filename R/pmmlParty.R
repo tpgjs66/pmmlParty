@@ -29,7 +29,7 @@ pmmlparty <- function(model,
                        formula,
                        data = data,
                        model.name="CHAID_Model",
-                       app.name="Rattle/PMML",
+                       app.name="PMML",
                        description="CHAID Decision Tree Model",
                        copyright=NULL,
                        transforms=NULL,
@@ -112,7 +112,7 @@ pmmlparty <- function(model,
 
   # PMML -> Header
 
-  pmml <- append.XMLNode(pmml, pmml:::.pmmlHeader(description, copyright, app.name))
+  pmml <- append.XMLNode(pmml, pmmlHeader(description, copyright, app.name))
 
   # PMML -> DataDictionary
 
