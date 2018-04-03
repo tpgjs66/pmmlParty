@@ -90,7 +90,7 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
     if (length(split.points) > 0){
       for (i in 1:length(split.points)) {
         if (i == 1) {
-          nb[[i]] <- as.list(2:as.numeric(split.points[i]))
+          nb[[i]] <- as.list(2:as.numeric(split.points[i+1]-1))
         } else if (i == length(split.points)) {
           nb[[i]] <- as.list(as.numeric(split.points[i]):as.numeric(length(depths)))
         } else {
@@ -101,7 +101,7 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
         nnb <- unlist(nb[[i]])
         child <- genPartyNodes(depths[nnb],ids[nnb],counts[nnb],
                                scores[nnb],fieldLabels[nnb],ops[nnb],
-                               values[nnb],model,data,ii,rows[nnb],i)
+                               values[nnb],model,data,ii,rows[nnb],ii)
         node <- append.XMLNode(node,child)
       }
     }
@@ -117,3 +117,4 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
 
   return(node)
 }
+
