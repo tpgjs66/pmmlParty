@@ -49,12 +49,12 @@ pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NU
     else if (field$class[[field$name[i]]] == "factor")
     {
       optypelist[[fname]] <- "categorical"
-      datypelist[[fname]] <- "string"
+      datypelist[[fname]] <- "double"
     }
     else if (field$class[[field$name[i]]] == "ordered")
     {
       optypelist[[fname]] <- "ordinal"
-      datypelist[[fname]] <- "string"
+      datypelist[[fname]] <- "double"
     }
     else #catch any other class, including character
     {
@@ -129,7 +129,10 @@ pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NU
     optype <- optypelist[[namelist[ndf2][[1]]]]
     datype <- datypelist[[namelist[ndf2][[1]]]]
     data.fields[[nmbr]] <- xmlNode("DataField", attrs=c(name=namelist[ndf2],
-                                                        optype=optype, dataType=datype))
+                                                        optype=optype,
+                                                        isCyclic="0",
+                                                        dataType=datype,
+                                                        displayName=""))
 
     # DataDictionary -> DataField -> Interval
     fname <- namelist[ndf2][[1]]
@@ -158,14 +161,14 @@ pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NU
         for (j in seq_along(lev))
         {
           data.fields[[nmbr]][[j]] <- xmlNode("Value",
-                                              attrs=c(value=pmml:::.markupSpecials(lev[j])))
+                                              attrs=c(property="valid",value=pmml:::.markupSpecials(lev[j])))
         }
       } else
       {
         for (j in seq_along(field$levels[[namelist[nmbr][[1]]]]))
         {
           data.fields[[nmbr]][[j]] <- xmlNode("Value",
-                                              attrs=c(value=field$levels[[namelist[nmbr][[1]]]][j]))
+                                              attrs=c(property="valid",value=field$levels[[namelist[nmbr][[1]]]][j]))
           # attrs=c(value=.markupSpecials(field$levels[[namelist[nmbr][[1]]]][j])))
         }
       }

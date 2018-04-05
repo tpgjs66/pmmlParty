@@ -121,7 +121,7 @@ pmmlparty <- function(model,
                                             functionName=function.name,
                                             algorithmName="CHAID",
                                             splitCharacteristic="multiSplit",
-                                            missingValueStrategy="defaultChild",
+                                            missingValueStrategy="",
                                             noTrueChildStrategy="returnLastPrediction"))
 
   # PMML -> TreeModel -> MiningSchema
