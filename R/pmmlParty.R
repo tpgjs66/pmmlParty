@@ -9,7 +9,6 @@
 #' This package is developed for own use (i.e., CHAID).
 #' @import XML
 #' @import pmml
-#' @import CHAID
 #' @return An object of class pmml
 #' @export
 #' @seealso \code{\link[pmml]{pmml.rpart}} \code{\link[pmml]{pmml.randomForest}}
