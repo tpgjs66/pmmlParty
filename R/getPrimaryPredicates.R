@@ -21,7 +21,8 @@ getPrimaryPredicates <- function(field,op,value)
                                                         value=value[[i]])))
   }
   }
-  if (length(value) == 1) {
+  value.level <-length(value[!value %in% "NA"])
+  if (value.level == 1) {
     predicate <- append.XMLNode(predicate,xmlNode("False"))
   }
   return(predicate)
