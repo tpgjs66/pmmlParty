@@ -14,10 +14,12 @@ getPrimaryPredicates <- function(field,op,value)
 
   for (i in 1:length(value)) {
   op <- "equal"
+  if (value[[i]] != "NA") {
   predicate <- append.XMLNode(predicate,xmlNode("SimplePredicate",
                                                 attrs=c(field=field,
                                                         operator=op,
                                                         value=value[[i]])))
+  }
   }
   if (length(value) == 1) {
     predicate <- append.XMLNode(predicate,xmlNode("False"))
