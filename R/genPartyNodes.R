@@ -50,10 +50,11 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
                                                                    df1 = "0",
                                                                    adjPValue = "0",
                                                                    fStats = "0")))
+    extension <- append.XMLNode(extension,xnode)
 
     ## for non-parametric density estimation
     if (partykit:::is.terminal(model[ii]$node)) {
-      xnode <- append.XMLNode(xnode, xmlNode("DataValue", as.data.frame(x)))
+      extension <- append.XMLNode(extension, xmlNode("DataValues", paste(x,collapse=" ")))
 
       # Compute a (Gaussian) kernel density estimate.
       d <- density(x, kernel = "gaussian", bw = "nrd0", from = min(x), to = max(x))
@@ -61,10 +62,8 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
       width <- d$bw
       #xnode <- append.XMLNode(xnode, xmlNode("KernelDensity", as.data.frame(x)))
 
-      xnode <- append.XMLNode(xnode, xmlNode("BandWidth", width))
+      extension <- append.XMLNode(extension, xmlNode("BandWidth", width))
     }
-
-    extension <- append.XMLNode(extension,xnode)
 
     node <- append.XMLNode(node,extension)
   }
