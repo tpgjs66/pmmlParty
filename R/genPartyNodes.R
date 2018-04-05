@@ -46,10 +46,10 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
 
     xnode <- xmlNode("X-Node")
     xnode <- append.XMLNode(xnode, xmlNode("X-RegInfo", attrs= c(stdDev = sd(x), mean = mean(x))))
-    xnode <- append.XMLNode(xnode, xmlNode("X-NodeStats", attrs= c(df2 = "NA",
-                                                                   df1 = "NA",
-                                                                   adjPValue = "NA",
-                                                                   fStats = "NA")))
+    xnode <- append.XMLNode(xnode, xmlNode("X-NodeStats", attrs= c(df2 = "0",
+                                                                   df1 = "0",
+                                                                   adjPValue = "0",
+                                                                   fStats = "0")))
 
     ## for non-parametric density estimation
     if (partykit:::is.terminal(model[ii]$node)) {
