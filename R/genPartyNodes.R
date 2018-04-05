@@ -35,37 +35,37 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
   } else  {# Leaf node
     node <- xmlNode("Node", attrs=c(id=id,score=score, recordCount=count))
   }
-  
+
   if (function.name == "classification") {
-    
+
   } else { ## for regression
     ## Data value in the node
     x <- partykit:::data_party(model,ii)$'(response)'
-    
+
     extension <- xmlNode("Extension")
-    
+
     xnode <- xmlNode("X-Node")
     xnode <- append.XMLNode(xnode, xmlNode("X-RegInfo", attrs= c(stdDev = sd(x), mean = mean(x))))
     xnode <- append.XMLNode(xnode, xmlNode("X-NodeStats", attrs= c(df2 = "NA",
                                                                    df1 = "NA",
                                                                    adjPValue = "NA",
                                                                    fStats = "NA")))
-    
+
     ## for non-parametric density estimation
     if (partykit:::is.terminal(model[ii]$node)) {
       xnode <- append.XMLNode(xnode, xmlNode("DataValue", as.data.frame(x)))
-      
+
       # Compute a (Gaussian) kernel density estimate.
       d <- density(x, kernel = "gaussian", bw = "nrd0", from = min(x), to = max(x))
       # Sample from the KDE.
-      width <- d$bw          
+      width <- d$bw
       #xnode <- append.XMLNode(xnode, xmlNode("KernelDensity", as.data.frame(x)))
-      
+
       xnode <- append.XMLNode(xnode, xmlNode("BandWidth", width))
     }
-    
+
     extension <- append.XMLNode(extension,xnode)
-    
+
     node <- append.XMLNode(node,extension)
   }
 
@@ -79,6 +79,8 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
 
     # Add the primary predicate
     predicate <- append.XMLNode(predicate,getPrimaryPredicates(fieldLabel,op,value))
+
+    predicate <- append.XMLNode(predicate,xmlNode("True"))
 
     # Add the surrogate predicates
     # predicate <- getSurrogatePredicates(predicate, model, parent_ii, position)
@@ -98,8 +100,8 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
   } else { ## for regression
     node <- getScoreDistributions(node, ylevel, model, ii ,function.name)
   }
-  
-  
+
+
 
   # The recursive function to create child nodes.
 

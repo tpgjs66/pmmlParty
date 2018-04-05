@@ -19,11 +19,8 @@ getPrimaryPredicates <- function(field,op,value)
                                                         operator=op,
                                                         value=value[[i]])))
   }
-  # }
-  # else if (op == "isIn")
-  # {
-  #   predicate <- getSimpleSetPredicate(field,op,value)
-  # }
-  #
+  if (length(value) == 1) {
+    predicate <- append.XMLNode(predicate,xmlNode("False"))
+  }
   return(predicate)
 }
