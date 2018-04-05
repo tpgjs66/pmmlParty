@@ -9,6 +9,7 @@
 #' This package is developed for own use (i.e., CHAID).
 #' @import XML
 #' @import pmml
+#' @import CHAID
 #' @return An object of class pmml
 #' @export
 #' @seealso \code{\link[pmml]{pmml.rpart}} \code{\link[pmml]{pmml.randomForest}}
@@ -39,9 +40,6 @@ pmmlparty <- function(model,
 {
   if (! inherits(model, "party")) stop("Not a legitimate party object")
   requireNamespace("party", quietly=TRUE)
-
-  #function.name <- "classification"
-  #if (model$method != "class") function.name <- "regression"
 
   function.name <- "classification"
   if (! is.factor(data[,as.character(formula[[2]])])) function.name <- "regression"
@@ -132,10 +130,10 @@ pmmlparty <- function(model,
   the.model <- append.XMLNode(the.model, pmml:::.pmmlMiningSchema(field, target, transformed=transforms,unknownValue=unknownValue))
 
   # PMML -> TreeModel -> Output
-
+  if (function.name == "classification"){
   the.model <- append.XMLNode(the.model, pmml:::.pmmlOutput(field, target, switch(function.name,
                                                                            classification="categorical", regression="continuous")))
-
+  }
   # PMML -> TreeModel -> LocalTransformations -> DerivedField -> NormContiuous
 
   # test of Zementis xform functions

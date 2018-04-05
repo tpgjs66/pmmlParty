@@ -5,7 +5,7 @@
 \title{Generate PMML for party objects}
 \usage{
 pmmlparty(model, formula, data = data, model.name = "CHAID_Model",
-  app.name = "Rattle/PMML", description = "CHAID Decision Tree Model",
+  app.name = "PMML", description = "CHAID Decision Tree Model",
   copyright = NULL, transforms = NULL, unknownValue = NULL,
   dataset = NULL, ...)
 }

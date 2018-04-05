@@ -53,11 +53,11 @@ buildPartyNode <- function(model,function.name)
       tt <- gsub("\"","",noderule)
       values[[i]] <- tt
     }
-    nodes <- genPartyNodes(depths, ids, counts, scores, fieldLabels, ops, values,
+    nodes <- genPartyNodes(function.name, depths, ids, counts, scores, fieldLabels, ops, values,
                            model, data, parent_ii, rows,"right")
   } else {
-    nodes <- genPartyNodes(depths, ids, counts, scores, fieldLabels, ops, values,
+    nodes <- genPartyNodes(function.name, depths, ids, counts, scores, fieldLabels, ops, values,
                            model, data, parent_ii, rows,"right")
   }
-  # return(node)
+  ## return(node)
 }

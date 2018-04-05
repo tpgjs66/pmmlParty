@@ -4,7 +4,7 @@
 #
 # Goal: create nodes for the tree (a recursive function)
 
-genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
+genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabels,
                           ops, values, model, data=data, parent_ii, rows, position)
 {
   depth <- depths[1]
@@ -24,7 +24,7 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
 
   if(length(ids) > 1) { # Non-leaf node
     # sons <- 2*id + c(0,1)
-    sons <- nodeids(model, from = id)
+    sons <- partykit:::nodeids(model, from = id)
     # sons.n <- ff$n[match(sons, ids)]
     sons.n <- counts[match(sons,ids)]
 
@@ -34,6 +34,39 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
     node <- xmlNode("Node", attrs=c(id=id, score=score, recordCount=count))
   } else  {# Leaf node
     node <- xmlNode("Node", attrs=c(id=id,score=score, recordCount=count))
+  }
+  
+  if (function.name == "classification") {
+    
+  } else { ## for regression
+    ## Data value in the node
+    x <- partykit:::data_party(model,ii)$'(response)'
+    
+    extension <- xmlNode("Extension")
+    
+    xnode <- xmlNode("X-Node")
+    xnode <- append.XMLNode(xnode, xmlNode("X-RegInfo", attrs= c(stdDev = sd(x), mean = mean(x))))
+    xnode <- append.XMLNode(xnode, xmlNode("X-NodeStats", attrs= c(df2 = "NA",
+                                                                   df1 = "NA",
+                                                                   adjPValue = "NA",
+                                                                   fStats = "NA")))
+    
+    ## for non-parametric density estimation
+    if (partykit:::is.terminal(model[ii]$node)) {
+      xnode <- append.XMLNode(xnode, xmlNode("DataValue", as.data.frame(x)))
+      
+      # Compute a (Gaussian) kernel density estimate.
+      d <- density(x, kernel = "gaussian", bw = "nrd0", from = min(x), to = max(x))
+      # Sample from the KDE.
+      width <- d$bw          
+      #xnode <- append.XMLNode(xnode, xmlNode("KernelDensity", as.data.frame(x)))
+      
+      xnode <- append.XMLNode(xnode, xmlNode("BandWidth", width))
+    }
+    
+    extension <- append.XMLNode(extension,xnode)
+    
+    node <- append.XMLNode(node,extension)
   }
 
   # Create the predicate for the node
@@ -54,18 +87,19 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
   }
   node <- append.XMLNode(node, predicate)
 
-  method <- "classification"
-  # if (! is.factor(data[,as.character(formula[[2]])])) method <- "regression"
-
   # Add score distribution for classification case.
 
-  if(method == "classification") {
+  if(function.name == "classification") {
     #ylevel <- attr(model,'ylevels')
     # ylevel <- as.character(unique(partykit:::data_party(chaidUS)[,as.character(formula[[2]])]))
     ylevel <- as.character(unique(partykit:::data_party(model)[,"(response)"]))
     #node <- .getScoreDistributions(node, ylevel, ff, ii)
-    node <- getScoreDistributions(node, ylevel, model, ii)
+    node <- getScoreDistributions(node, ylevel, model, ii ,function.name)
+  } else { ## for regression
+    node <- getScoreDistributions(node, ylevel, model, ii ,function.name)
   }
+  
+  
 
   # The recursive function to create child nodes.
 
@@ -99,7 +133,7 @@ genPartyNodes <- function(depths, ids, counts, scores, fieldLabels,
       }
       for (i in 1:length(nb)) {
         nnb <- unlist(nb[[i]])
-        child <- genPartyNodes(depths[nnb],ids[nnb],counts[nnb],
+        child <- genPartyNodes(function.name,depths[nnb],ids[nnb],counts[nnb],
                                scores[nnb],fieldLabels[nnb],ops[nnb],
                                values[nnb],model,data,ii,rows[nnb],ii)
         node <- append.XMLNode(node,child)
