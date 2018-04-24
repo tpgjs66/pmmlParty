@@ -53,7 +53,7 @@ pmmlparty <- function(model,
 
   field <- NULL
   field$name <- as.character(attr(model$terms, "variables"))[-1]
-  field$name[1] <- as.character(formula[[2]])
+  field$name[1] <- as.character(formula[[2]]) ## response variable always placed first
   for (i in 1:length(field$name)) {
     field$class[i] <- class(data[,field$name[i]])[1]
   }
@@ -113,7 +113,7 @@ pmmlparty <- function(model,
 
   # PMML -> DataDictionary
 
-  pmml <- append.XMLNode(pmml, pmmlDataDictionary(field, dataset, weights=weights,transformed=transforms))
+  pmml <- append.XMLNode(pmml, pmmlDataDictionary(field, dataset, weights=weights,transformed=transforms,function.name))
 
   # PMML -> TreeModel
 

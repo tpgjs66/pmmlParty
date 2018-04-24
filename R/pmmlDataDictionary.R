@@ -1,5 +1,5 @@
 
-pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NULL)
+pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NULL, function.name)
 {
   # 090806 Generate and return a DataDictionary element that includes
   # each supplied field.
@@ -35,6 +35,17 @@ pmmlDataDictionary <- function(field, dataset=NULL, weights=NULL, transformed=NU
     optype <- "UNKNOWN"
     datype <- "UNKNOWN"
     values <- NULL
+    if (i == 1) {
+      if (function.name == "classification") { ## for classification tree response
+        optypelist[[fname]] <- "categorical"
+        datypelist[[fname]] <- "string"
+        next
+      } else { ## for regression tree response
+        optypelist[[fname]] <- "continuous"
+        datypelist[[fname]] <- "double"
+        next
+      }
+    }
 
     if (field$class[[field$name[i]]] == "numeric")
     {
