@@ -22,6 +22,9 @@ An object of class pmml
 \description{
 Generate the PMML representation for a party object from package party and partykit
 }
+\author {
+Seheon Kim
+}
 \details{
 PMML is an XML based language which provides a way for applications to define statistical and data mining models and to share models between PMML compliant applications. More information about PMML and the Data Mining Group can be found at http://www.dmg.org.
 This package generates PMML for party objects, and is not a part of the PMML package for R.
