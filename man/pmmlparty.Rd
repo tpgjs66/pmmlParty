@@ -22,7 +22,7 @@ An object of class pmml
 \description{
 Generate the PMML representation for a party object from package party and partykit
 }
-\author {
+\author{
 Seheon Kim
 }
 \details{
