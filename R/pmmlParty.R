@@ -33,7 +33,7 @@ pmmlparty <- function(model,
                        description="CHAID Decision Tree Model",
                        copyright=NULL,
                        transforms=NULL,
-                       unknownValue=NULL,
+                       # unknownValue=NULL,
                        dataset=NULL,
                        ...)
 {
@@ -126,7 +126,7 @@ pmmlparty <- function(model,
 
   # PMML -> TreeModel -> MiningSchema
 
-  the.model <- append.XMLNode(the.model, pmml:::.pmmlMiningSchema(field, target, transformed=transforms,unknownValue=unknownValue))
+  the.model <- append.XMLNode(the.model, pmml:::.pmmlMiningSchema(field, target, transformed=transforms))
 
   # PMML -> TreeModel -> Output
   if (function.name == "classification"){
