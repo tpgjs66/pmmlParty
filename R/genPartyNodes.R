@@ -57,7 +57,7 @@ genPartyNodes <- function(function.name, depths, ids, counts, scores, fieldLabel
       extension <- append.XMLNode(extension, xmlNode("DataValues", paste(x,collapse=" ")))
 
       # Compute a (Gaussian) kernel density estimate.
-      d <- density(x, kernel = "gaussian", bw = "nrd0", from = min(x), to = max(x))
+      d <- density(x, kernel = "gaussian", bw = "nrd0", from = min(x), to = max(x), na.rm=TRUE)
       # Sample from the KDE.
       width <- d$bw
       #xnode <- append.XMLNode(xnode, xmlNode("KernelDensity", as.data.frame(x)))
