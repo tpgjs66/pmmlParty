@@ -3,7 +3,7 @@ Type: Package
 Title: Generate PMML for party objects
 Version: 0.1.0
 Authors@R: person("Seheon", "Kim", email = "s.kim@tue.nl", role = c("aut", "cre"))
-Description: Generate PMML representation for a party object from package party and partykit.
+Description: Generate the PMML representation for a party object from the package party and partykit.
 Depends: R (>= 3.2.3),
 License: MIT
 Encoding: UTF-8
