@@ -2,7 +2,7 @@
 % Please edit documentation in R/pmmlParty.R
 \name{pmmlparty}
 \alias{pmmlparty}
-\title{Generate PMML for party objects}
+\title{GGenerate the PMML representation for a party object from package party and partykit}
 \usage{
 pmmlparty(model, formula, data = data, model.name = "CHAID_Model",
   app.name = "PMML", description = "CHAID Decision Tree Model",
